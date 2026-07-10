@@ -1,0 +1,20 @@
+{
+    "aws_access_key_id": "YOUR_ACCESS_KEY",
+    "aws_secret_access_key": "YOUR_SECRET_KEY",
+
+    "aws_region": "ap-south-1",
+
+    "s3_bucket_name": "YOUR_BUCKET_NAME",
+    "s3_region": "ap-south-1",
+
+    "rds_host": "YOUR_RDS_ENDPOINT",
+    "rds_user": "admin",
+    "rds_password": "YOUR_PASSWORD",
+    "rds_db_name": "attendance_db",
+
+    "sns_topic_arn": "YOUR_SNS_TOPIC_ARN",
+    "sns_region": "ap-south-1",
+
+    "rekognition_collection_id": "attendance_collection",
+    "rekognition_region": "ap-south-1"
+}

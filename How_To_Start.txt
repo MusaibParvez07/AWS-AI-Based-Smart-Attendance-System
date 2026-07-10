@@ -1,0 +1,15 @@
+Ec2 (done)
+S3 Bucket (done)
+Rekognition (done)
+RDS MySQL (done)
+SNS (done)
+
+
+How to start:-
+
+   1. cd "D:\CLoud EL\FaceApp"
+   2. .\venv\Scripts\streamlit run Home.py
+
+How to open RDS MySQL:-
+   1. cd "D:\CLoud EL\FaceApp"
+   2. .\venv\Scripts\python.exe check_rds.py
