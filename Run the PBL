@@ -1,0 +1,156 @@
+// Steps to Execute in Exams:
+
+Have already:
+Created AWS account
+Configured S3, Rekognition, RDS, SNS
+Tested AWS connection
+Successfully executed on your Ubuntu system
+Uploaded clean project to GitHub
+Now:
+Clone → Setup Python → Add AWS config → Update RDS IP → Run
+
+Follow:
+Step 1: Open Terminal and install basics
+sudo apt update
+sudo apt install -y git python3 python3-pip python3-venv python3-dev build-essential cmake ffmpeg libgl1 libglib2.0-0 mysql-client netcat-openbsd
+
+Step 2: Clone your GitHub project
+cd ~/Documents
+git clone https://github.com/MusaibParvez07/Cloud-Smart-Attendance-System.git
+ls
+
+Step 3: Create fresh virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+Step 4: Install dependencies
+python -m pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
+
+Step 5: Create AWS config file
+cp aws_config.example.json aws_config.json
+nano aws_config.json
+open and paste:
+{
+  "aws_access_key_id": "PASTE_YOUR_IAM_ACCESS_KEY_HERE",
+  "aws_secret_access_key": "PASTE_YOUR_IAM_SECRET_ACCESS_KEY_HERE",
+  "aws_region": "ap-south-1",
+
+  "s3_bucket_name": "musaib-smart-attendance-faces-2026",
+  "s3_region": "ap-south-1",
+
+  "rds_host": "attendance-db.c184eaoq25qk.ap-south-1.rds.amazonaws.com",
+  "rds_user": "admin",
+  "rds_password": "PASTE_YOUR_RDS_PASSWORD_HERE",
+  "rds_db_name": "attendance_db",
+
+  "sns_topic_arn": "PASTE_YOUR_COMPLETE_SNS_TOPIC_ARN_HERE",
+  "sns_region": "ap-south-1",
+
+  "rekognition_collection_id": "attendance_collection",
+  "rekognition_region": "ap-south-1"
+}
+
+
+Step 6:
+curl -4 ifconfig.me
+See ip and paste in rds inbound rules.
+Test: python aws_test.py
+If all 4 green, project is ready.
+
+Step 7: Start project
+python -m streamlit run Home.py
+copy and paste host address. The app will open, just demonstrate then.
+
+
+Demonstration order
+1. Home Page
+Show:
+S3 Connected
+RDS Online
+Rekognition Active
+Explain:
+"Application is connected with AWS services using boto3."
+
+
+2. Registration
+Fill:
+Name
+Role
+Course
+Email
+Capture face.
+Submit.
+Explain:
+
+Face Image
+     |
+     v
+Amazon S3
+
+Face Features
+     |
+     v
+Amazon Rekognition
+
+User Details
+     |
+     v
+Amazon RDS MySQL
+
+3. Verify AWS
+Show:
+AWS Console:
+S3:
+Bucket → Uploaded image
+Rekognition:
+Face collection created
+RDS:
+Run:
+python check_rds.py
+
+4. Real Time Attendance
+Open:
+Real Time Prediction
+Allow camera.
+Recognition happens.
+Explain:
+Camera
+
+↓
+
+Rekognition compares face
+
+↓
+
+Attendance stored in RDS
+
+↓
+
+SNS sends notification
+
+5. Report
+Show:
+Registered Users
+Attendance Logs
+Search Records
+
+6. CloudWatch (if asked)
+AWS Console:
+CloudWatch
+Metrics
+RDS
+DatabaseConnections
+CPUUtilization
+Explain:
+"CloudWatch automatically monitors AWS service performance."
+
+Main Commands:
+cd ~/Documents/Cloud-Smart-Attendance-System
+
+source .venv/bin/activate
+
+python aws_test.py
+
+python -m streamlit run Home.py
+
