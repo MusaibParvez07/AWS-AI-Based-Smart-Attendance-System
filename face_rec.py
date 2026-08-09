@@ -107,13 +107,14 @@ try:
 except Exception:
     # 2. Try remote Redis
     try:
-        r_remote = redis.StrictRedis(
-            host='13.233.200.165',
-            port=6379,
-            password='yourStrongPassword123',
-            socket_timeout=2.0,
-            socket_connect_timeout=2.0
-        )
+
+r_remote = redis.StrictRedis(
+    host=os.getenv('REDIS_HOST', '13.233.200.165'),
+    port=int(os.getenv('REDIS_PORT', '6379')),
+    password=os.getenv('REDIS_PASSWORD'),
+    socket_timeout=2.0,
+    socket_connect_timeout=2.0
+)
         r_remote.ping()
         r = r_remote
         print("Connected to REMOTE Redis database.")
