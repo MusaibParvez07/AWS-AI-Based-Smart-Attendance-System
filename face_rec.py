@@ -99,22 +99,27 @@ class LocalRedisFallback:
 # Initialize database client
 r = None
 # 1. Try local Redis (e.g. if running in docker or local windows redis)
+
 try:
-    r_local = redis.StrictRedis(host='localhost', port=6379, socket_timeout=1.0, socket_connect_timeout=1.0)
+    r_local = redis.StrictRedis(
+        host='localhost',
+        port=6379,
+        socket_timeout=1.0,
+        socket_connect_timeout=1.0
+    )
     r_local.ping()
     r = r_local
     print("Connected to LOCAL Redis database.")
 except Exception:
     # 2. Try remote Redis
     try:
-
-r_remote = redis.StrictRedis(
-    host=os.getenv('REDIS_HOST', '13.233.200.165'),
-    port=int(os.getenv('REDIS_PORT', '6379')),
-    password=os.getenv('REDIS_PASSWORD'),
-    socket_timeout=2.0,
-    socket_connect_timeout=2.0
-)
+        r_remote = redis.StrictRedis(
+            host=os.getenv('REDIS_HOST', '13.233.200.165'),
+            port=int(os.getenv('REDIS_PORT', '6379')),
+            password=os.getenv('REDIS_PASSWORD'),
+            socket_timeout=2.0,
+            socket_connect_timeout=2.0
+        )
         r_remote.ping()
         r = r_remote
         print("Connected to REMOTE Redis database.")
