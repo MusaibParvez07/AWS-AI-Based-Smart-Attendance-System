@@ -72,17 +72,20 @@ The system detects and recognizes registered faces in real time, logs attendance
 
 ## 📸 Screenshots
 
-| Home Page | Attendance Page |
+| Dashboard | Real-Time Recognition |
 |---|---|
-| ![Home Page](Screenshots/img-1.png) | ![Attendance Page](Screenshots/img-2.png) |
+| ![Home Dashboard](Screenshots/home-dashboard.png) | ![Real-Time Prediction](Screenshots/real-time-prediction.png) |
+| Model and database health checks on load | Live face-embedding table pulled from Redis, ready for recognition |
 
-| Registration Page | Report Page |
+| Registration | Attendance Logs |
 |---|---|
-| ![Registration Page](Screenshots/img-3.png) | ![Report Page](Screenshots/img-4.png) |
+| ![Registration Form](Screenshots/registration-form.png) | ![Attendance Logs](Screenshots/attendance-logs.png) |
+| Face-sample enrollment with role, course, and contact details | Raw check-in event log with per-user timestamps |
 
-| Additional View | Additional View |
+| Attendance Report | Filter Report |
 |---|---|
-| ![App View](Screenshots/img-5.png) | ![App View](Screenshots/img-6.png) |
+| ![Attendance Report](Screenshots/attendance-report.png) | ![Filter Report](Screenshots/filter-report.png) |
+| Consolidated in/out times, duration, and status per user | Query attendance by date, name, role, and duration threshold |
 
 > Screenshots are stored in the [`Screenshots/`](./Screenshots) directory.
 
