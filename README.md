@@ -1,310 +1,160 @@
-☁️ AWS AI-Based Smart Attendance System
+# 🎯 AWS AI-Based Smart Attendance System
 
-Cloud-based, serverless facial recognition attendance system built with AWS to automate attendance check-ins, recognition, database management, and real-time notifications.
+**A facial-recognition-powered attendance platform combining computer vision with a serverless, cloud-ready AWS architecture.**
 
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![AWS](https://img.shields.io/badge/AWS-Rekognition%20%7C%20S3%20%7C%20Lambda%20%7C%20SNS-FF9900?logo=amazonaws&logoColor=white)](https://aws.amazon.com/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-5C3EE8?logo=opencv&logoColor=white)](https://opencv.org/)
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen)]()
 
+---
 
+## 📖 Overview
 
+Manual roll-call attendance is slow, error-prone, and easy to game. This project replaces it with an **automated, facial-recognition-driven attendance system**, built with a cloud-native architecture in mind and a fully working local implementation for fast iteration and demoing.
 
+The system detects and recognizes registered faces in real time, logs attendance instantly, and surfaces the results through a clean Streamlit dashboard — with **AWS Rekognition, S3, Lambda, SNS, RDS, and CloudWatch** integrated as the intended production backbone for a serverless, scalable deployment.
 
+> 💡 **Two ways to run it:** a zero-dependency **local mode** (InsightFace + OpenCV, no AWS account needed) for quick setup and demos, and a **cloud-ready mode** designed around AWS managed services for production-scale deployment.
 
-📌 Overview
+---
 
-The AWS AI-Based Smart Attendance System automates attendance tracking using facial recognition and cloud services.
+## ✨ Key Features
 
-The system uses Amazon Rekognition for facial recognition and integrates AWS services for application deployment, cloud storage, database management, serverless processing, notifications, monitoring, and secure access management.
+### 🖥️ Face Detection & Recognition
+- Real-time face detection and recognition powered by **InsightFace**
+- **OpenCV**-based image and video pipeline
+- Automated, instant attendance logging on recognition
+- Local fallback storage when a live data store isn't available
 
-The application provides a Streamlit-based interface for registration, real-time prediction, attendance processing, and reporting.
+### 📝 Registration & Reporting
+- Guided face-registration workflow for onboarding new users
+- Attendance record management and historical reports
+- Simulated data mode for testing and demos
 
-✨ Key Features
+### 🌐 Streamlit Web Interface
+- **Home / Dashboard** — system overview and navigation
+- **Real-Time Prediction** — live recognition and check-in
+- **Registration Form** — enroll new faces
+- **Reports** — view and export attendance history
 
-👤 Facial Recognition
+### 🔐 Authentication & Security
+- Username/password application authentication
+- Password hashing for credential storage
+- Environment-variable-based configuration — no hard-coded secrets
+- `.gitignore`-protected local configuration files
 
-Facial recognition using Amazon Rekognition
+### ☁️ Cloud-Ready Architecture (AWS)
+- **Amazon Rekognition** for scalable facial recognition
+- **AWS Lambda** for a serverless processing pipeline
+- **Amazon S3** for image/data storage
+- **Amazon SNS** for real-time attendance notifications
+- **Amazon RDS** for durable, queryable attendance records
+- **Amazon CloudWatch** for monitoring and logging
+- **IAM** for least-privilege access control
 
-Face registration and identification
+---
 
-Real-time attendance check-in
+## 🛠️ Tech Stack
 
-Automated attendance recording
+| Layer | Technology |
+|---|---|
+| Language | Python |
+| Web Interface | Streamlit |
+| Face Recognition | InsightFace |
+| Image/Video Processing | OpenCV |
+| Data Processing | NumPy, Pandas |
+| Caching / Data Store | Redis (optional), Pickle (local fallback) |
+| Cloud Services | AWS Rekognition, S3, Lambda, SNS, RDS, CloudWatch, IAM |
 
-Computer vision-based processing
+---
 
-☁️ Cloud-Based Architecture
+## 📸 Screenshots
 
-Cloud deployment using Amazon EC2
+| Home Page | Attendance Page |
+|---|---|
+| ![Home Page](Screenshots/img-1.png) | ![Attendance Page](Screenshots/img-2.png) |
 
-Image and object storage using Amazon S3
+| Registration Page | Report Page |
+|---|---|
+| ![Registration Page](Screenshots/img-3.png) | ![Report Page](Screenshots/img-4.png) |
 
-Attendance and user data management using Amazon RDS
+| Additional View | Additional View |
+|---|---|
+| ![App View](Screenshots/img-5.png) | ![App View](Screenshots/img-6.png) |
 
-Serverless processing using AWS Lambda
+> Screenshots are stored in the [`Screenshots/`](./Screenshots) directory.
 
-Real-time notifications using Amazon SNS
+---
 
-Application monitoring using Amazon CloudWatch
+## 🚀 Getting Started (Local Setup — Windows)
 
-Secure access management using AWS IAM
+### Requirements
+- Windows 10 or Windows 11
+- Python 3.x
+- Git
+- A modern web browser
 
-📊 Attendance Management
+### 1. Clone the repository
+```bash
+git clone https://github.com/MusaibParvez07/AWS-AI-Based-Smart-Attendance-System.git
+cd AWS-AI-Based-Smart-Attendance-System
+```
 
-Automated attendance check-ins
+### 2. Create and activate a virtual environment
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
 
-User registration
+### 3. Install dependencies
+```bash
+python -m pip install -r requirements.txt
+```
 
-Attendance record management
+### 4. Run the app
+```bash
+python -m streamlit run Home.py
+```
 
-Attendance reports
+Then open **http://localhost:8501** in your browser.
 
-Real-time notification after attendance
+> No AWS account or paid cloud service is required to run the local version — Redis and AWS are optional enhancements, not prerequisites.
 
-Centralized cloud-based data management
+---
 
-🌐 Streamlit Web Interface
+## ☁️ Cloud Deployment Notes
 
-The application provides separate pages for:
+This repository ships with AWS helper/config scaffolding (`aws_helper.py`, `aws_config.example.json`, `configure.sh`) reflecting the system's intended production design:
 
-🏠 Home / Dashboard
+- **Rekognition** replaces local InsightFace inference for managed, scalable face matching
+- **Lambda** orchestrates the recognition-to-logging pipeline in a serverless flow
+- **S3** stores registered face images and captured frames
+- **RDS** persists attendance records for reporting and analytics
+- **SNS** pushes real-time check-in notifications
+- **CloudWatch** and **IAM** handle observability and access control
 
-📷 Real-Time Prediction
+AWS credentials are never committed to the repo — configuration is handled entirely through environment variables and `.gitignore`-excluded local files.
 
-👤 Registration Form
+---
 
-📊 Reports
+## 📁 Project Structure
 
-🔐 Security
-
-AWS IAM-based access management
-
-Authentication
-
-Username/password-based access
-
-Password hashing
-
-Secure handling of cloud resources and credentials
-
-☁️ AWS Services
-
-AWS Service
-
-Purpose
-
-Amazon Rekognition
-
-Facial recognition and face matching
-
-Amazon EC2
-
-Cloud application deployment and compute
-
-Amazon S3
-
-Cloud storage for application and facial data
-
-Amazon SNS
-
-Real-time attendance notifications
-
-Amazon RDS
-
-User and attendance data management
-
-AWS Lambda
-
-Serverless processing pipeline
-
-Amazon CloudWatch
-
-Monitoring and logging
-
-AWS IAM
-
-Identity and access management
-
-🔄 System Workflow
-
-                 User / Camera
-                       │
-                       ▼
-              Facial Recognition
-                       │
-                       ▼
-              Amazon Rekognition
-                       │
-                       ▼
-                 AWS Lambda
-              Serverless Pipeline
-                       │
-            ┌──────────┼──────────┐
-            ▼          ▼          ▼
-       Amazon S3   Amazon RDS   Amazon SNS
-        Storage     Database   Notification
-                                  │
-                                  ▼
-                         Real-Time Attendance
-                            Notification
-
-              EC2 → Application Deployment
-              IAM → Access Management
-              CloudWatch → Monitoring
-
-Attendance Flow
-
-User registers facial information.
-
-Facial data is processed for recognition.
-
-Amazon Rekognition identifies the registered user.
-
-AWS Lambda supports the serverless processing workflow.
-
-Attendance information is stored in Amazon RDS.
-
-Required files and facial data are stored using Amazon S3.
-
-Amazon SNS sends a real-time attendance notification.
-
-Amazon CloudWatch provides monitoring and logging.
-
-AWS IAM manages secure access to AWS resources.
-
-🛠️ Technology Stack
-
-Technology
-
-Purpose
-
-Python
-
-Core application development and backend logic
-
-Streamlit
-
-Interactive web application interface
-
-Amazon Rekognition
-
-Facial recognition and face matching
-
-Amazon EC2
-
-Cloud deployment and compute
-
-Amazon S3
-
-Cloud object storage
-
-Amazon SNS
-
-Real-time notifications
-
-Amazon RDS
-
-Database management
-
-AWS Lambda
-
-Serverless processing
-
-Amazon CloudWatch
-
-Monitoring and logging
-
-AWS IAM
-
-Access and permissions management
-
-OpenCV
-
-Image and video processing
-
-InsightFace
-
-Face detection and recognition support
-
-MySQL
-
-Relational database
-
-PyMySQL
-
-Python-MySQL connectivity
-
-NumPy
-
-Numerical and image-data processing
-
-Pandas
-
-Attendance data processing and reporting
-
-🧠 Concepts Demonstrated
-
-Computer Vision
-
-Computer vision techniques are used to process images and video frames for facial recognition and attendance automation.
-
-Facial Recognition
-
-Facial recognition identifies registered users using facial information and enables automated attendance check-ins.
-
-Serverless Computing
-
-AWS Lambda is used as part of the serverless processing pipeline, reducing the need to manage application servers for processing tasks.
-
-Cloud Computing
-
-AWS services provide the infrastructure required for deployment, storage, database management, processing, notifications, monitoring, and access control.
-
-Cloud Storage
-
-Amazon S3 provides scalable object storage for application and facial data.
-
-Cloud Database
-
-Amazon RDS provides managed relational database capabilities for user and attendance information.
-
-Event Notifications
-
-Amazon SNS enables real-time attendance notifications.
-
-Monitoring
-
-Amazon CloudWatch provides monitoring and logging capabilities for the cloud environment.
-
-Identity and Access Management
-
-AWS IAM controls access and permissions for AWS resources.
-
-📂 Project Structure
-
+```
 AWS-AI-Based-Smart-Attendance-System/
-│
 ├── .streamlit/
 │   └── config.toml
-│
 ├── assets/
 │   ├── style.css
 │   └── tech_bg.png
-│
 ├── insightface_model/
-│   └── models/
-│       └── buffalo_sc/
-│
+│   └── models/buffalo_sc/
 ├── pages/
 │   ├── 1_Real_Time_Prediction.py
 │   ├── 2_Registration_form.py
 │   └── 3_Report.py
-│
 ├── Screenshots/
-│   ├── image-1.png
-│   ├── image-2.png
-│   ├── image-3.png
-│   ├── image-4.png
-│   ├── image-5.png
-│   └── image-6.png
-│
 ├── Home.py
 ├── auth.py
 ├── aws_config.example.json
@@ -316,144 +166,23 @@ AWS-AI-Based-Smart-Attendance-System/
 ├── face_rec.py
 ├── main.sh
 ├── requirements.txt
-├── simulated_logs.txt
 └── README.md
+```
 
-🖥️ Application Pages
+---
 
-🏠 Home / Dashboard
+## 🔭 Roadmap
 
-Provides the main application interface and navigation.
+- [ ] Improved face recognition accuracy under varied lighting/angles
+- [ ] Real-time camera pipeline optimization
+- [ ] Enhanced attendance analytics dashboard
+- [ ] Exportable attendance reports (CSV/PDF)
+- [ ] Multi-user / role-based administration
+- [ ] Full managed-database (RDS) integration
+- [ ] End-to-end AWS deployment guide
 
-📷 Real-Time Prediction
+---
 
-Uses the facial recognition workflow to identify registered users and process attendance.
+---
 
-👤 Registration Form
-
-Allows users to register their facial information for attendance recognition.
-
-📊 Report
-
-Displays attendance information and reporting data.
-
-🔐 Security
-
-AWS IAM-based identity and access management
-
-Application authentication
-
-Username/password-based access
-
-Password hashing
-
-Secure cloud resource access
-
-Sensitive credentials excluded from source code
-
-Configuration separated from application code
-
-Never commit AWS access keys, secret keys, database passwords, or other sensitive credentials to the repository.
-
-🚀 Setup
-
-Requirements
-
-Windows 10 / Windows 11
-
-Python 3.x
-
-Git
-
-Modern web browser
-
-1. Clone the Repository
-
-git clone https://github.com/MusaibParvez07/AWS-AI-Based-Smart-Attendance-System.git
-cd AWS-AI-Based-Smart-Attendance-System
-
-2. Create a Virtual Environment
-
-python -m venv venv
-
-3. Activate the Virtual Environment
-
-venv\Scripts\activate
-
-4. Install Dependencies
-
-python -m pip install -r requirements.txt
-
-5. Start the Application
-
-python -m streamlit run Home.py
-
-Open the application:
-
-http://localhost:8501
-
-📸 Screenshots
-
-🏠 Home Page
-
-
-
-📋 Attendance Page
-
-
-
-👤 Registration Page
-
-
-
-📊 Report Page
-
-
-
-🖥️ Application View
-
-
-
-🖥️ Application View
-
-
-
-🎯 Project Highlights
-
-Built a cloud-based facial recognition attendance system
-
-Integrated Amazon Rekognition for facial recognition
-
-Used Amazon EC2 for cloud deployment
-
-Used Amazon S3 for cloud storage
-
-Used Amazon RDS for data management
-
-Implemented AWS Lambda for serverless processing
-
-Used Amazon SNS for real-time attendance notifications
-
-Used Amazon CloudWatch for monitoring and logging
-
-Used AWS IAM for secure access management
-
-Developed an interactive Streamlit application
-
-Automated attendance check-ins using facial recognition
-
-📈 Future Improvements
-
-Improved facial recognition accuracy
-
-Real-time camera optimization
-
-Enhanced attendance analytics
-
-Exportable attendance reports
-
-Multi-user administration
-
-Advanced cloud automation
-
-Improved API and documentation
+⭐ If you find this project useful, consider giving it a star!
