@@ -1,6 +1,6 @@
 # 🎯 AWS AI-Based Smart Attendance System
 
-**A facial-recognition-powered attendance platform combining computer vision with a serverless, cloud-ready AWS architecture.**
+**A serverless, facial-recognition-powered attendance platform built on AWS — Rekognition, Lambda, S3, SNS, RDS, and CloudWatch working together to replace manual roll-call with instant, automated check-ins.**
 
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
@@ -12,11 +12,18 @@
 
 ## 📖 Overview
 
-Manual roll-call attendance is slow, error-prone, and easy to game. This project replaces it with an **automated, facial-recognition-driven attendance system**, built with a cloud-native architecture in mind and a fully working local implementation for fast iteration and demoing.
+Manual roll-call attendance is slow, error-prone, and easy to game. This project replaces it with an **automated, facial-recognition-driven attendance system** architected around AWS managed services for a scalable, serverless deployment.
 
-The system detects and recognizes registered faces in real time, logs attendance instantly, and surfaces the results through a clean Streamlit dashboard — with **AWS Rekognition, S3, Lambda, SNS, RDS, and CloudWatch** integrated as the intended production backbone for a serverless, scalable deployment.
+The system detects and recognizes registered faces in real time, logs attendance instantly, and pushes live notifications the moment a check-in is recorded — all through a clean Streamlit dashboard.
 
-> 💡 **Two ways to run it:** a zero-dependency **local mode** (InsightFace + OpenCV, no AWS account needed) for quick setup and demos, and a **cloud-ready mode** designed around AWS managed services for production-scale deployment.
+- **Amazon Rekognition** handles scalable, managed facial recognition
+- **AWS Lambda** orchestrates a serverless recognition-to-logging pipeline
+- **Amazon S3** stores registered face images and captured frames
+- **Amazon RDS** persists attendance records for reporting
+- **Amazon SNS** delivers real-time check-in notifications
+- **CloudWatch + IAM** handle observability and least-privilege access control
+
+> 💡 **Local mode included:** a zero-dependency local build (InsightFace + OpenCV, no AWS account required) is also available for fast iteration and offline demos.
 
 ---
 
@@ -127,16 +134,16 @@ Then open **http://localhost:8501** in your browser.
 
 ---
 
-## ☁️ Cloud Deployment Notes
+## ☁️ AWS Architecture
 
-This repository ships with AWS helper/config scaffolding (`aws_helper.py`, `aws_config.example.json`, `configure.sh`) reflecting the system's intended production design:
+The AWS integration is wired through `aws_helper.py`, `aws_config.example.json`, and `configure.sh`, connecting each service into a single serverless pipeline:
 
-- **Rekognition** replaces local InsightFace inference for managed, scalable face matching
-- **Lambda** orchestrates the recognition-to-logging pipeline in a serverless flow
-- **S3** stores registered face images and captured frames
-- **RDS** persists attendance records for reporting and analytics
-- **SNS** pushes real-time check-in notifications
-- **CloudWatch** and **IAM** handle observability and access control
+```
+Camera Frame → Lambda → Rekognition (match) → RDS (log) → SNS (notify)
+                              │
+                              ▼
+                        S3 (face store)
+```
 
 AWS credentials are never committed to the repo — configuration is handled entirely through environment variables and `.gitignore`-excluded local files.
 
@@ -185,6 +192,7 @@ AWS-AI-Based-Smart-Attendance-System/
 - [ ] End-to-end AWS deployment guide
 
 ---
+
 
 ---
 
